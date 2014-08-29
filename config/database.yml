@@ -19,8 +19,8 @@ development:
   encoding: unicode
   database: have_read_development
   pool: 5
-  username: have_read
-  password:
+  username: appacademy
+  host: localhost
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -43,18 +43,18 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  adapter: postgresql
-  encoding: unicode
-  database: have_read_test
-  pool: 5
-  username: have_read
-  password:
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: have_read_production
-  pool: 5
-  username: have_read
-  password:
+# test:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: have_read_test
+#   pool: 5
+#   username: have_read
+#   password:
+#
+# production:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: have_read_production
+#   pool: 5
+#   username: have_read
+#   password:
