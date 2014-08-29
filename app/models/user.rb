@@ -23,7 +23,8 @@ class User < ActiveRecord::Base
     :moderated_subs,
     class_name: "Sub",
     foreign_key: :moderator_id,
-    primary_key: :id
+    primary_key: :id,
+    dependent: :destroy
   )
   
   

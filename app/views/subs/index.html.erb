@@ -1,7 +1,12 @@
 <h1>Subs</h1>
 
-<% Sub.all.each do |sub| %>
+<%= link_to "Create Sub", new_sub_url, method: :get if current_user %> 
 
-<%= sub.title %>
+<ul>
+  <% Sub.all.each do |sub| %>
 
-<% end %>
+  <li> <a href="<%= sub_url(sub) %>"><%= sub.title %></a> </li>
+
+  <% end %>
+</ul>
+

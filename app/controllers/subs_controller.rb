@@ -1,5 +1,8 @@
 class SubsController < ApplicationController
   
+  before_action :require_login, except: [:show, :index]
+  before_action :require_moderator, only: [:edit, :update, :destroy]
+  
   def create
     @sub = Sub.new(sub_params)
     @sub.moderator_id = current_user.id
@@ -24,8 +27,14 @@ class SubsController < ApplicationController
     render :new
   end
   
-  def udpate
-    
+  def update
+    @sub = Sub.find(params[:id])
+    if @sub.update_attributes(sub_params)
+      redirect_to sub_url(@sub)
+    else
+      flash.now[:errors] = @sub.errors.full_messages
+      render :edit
+    end
   end
   
   def edit
@@ -34,7 +43,9 @@ class SubsController < ApplicationController
   end
   
   def destroy
-    
+    @sub = Sub.find(params[:id])
+    @sub.destroy
+    redirect_to subs_url
   end
   
   private

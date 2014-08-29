@@ -1,10 +1,10 @@
-<% if @sub && @sub.persists? %>
+<% if @sub && @sub.persisted? %>
 
 <form action="<%= sub_url(@sub) %>" method="post">
   <input 
     type='hidden'
     name='_method'
-    method='PATCH'
+    value='PATCH'
   >
 
 <% else %>

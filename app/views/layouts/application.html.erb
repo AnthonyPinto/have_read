@@ -7,9 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= link_to "Home", subs_url, method: :get%>
 <% if current_user  %>
+<%= link_to "Log off", session_url, method: :delete %>
+<br>
 <a>Current User: <%= current_user.user_name %></a>
-<%= button_to "Log off", session_url, method: :delete %>
+<% else %>
+<%= link_to "Log In", new_session_url, method: :get%>
+<%= link_to "Join", new_user_url, method: :get%>
 <% end %>
 
 

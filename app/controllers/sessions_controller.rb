@@ -5,9 +5,10 @@ class SessionsController < ApplicationController
     if @user
       login!(@user)
       flash[:success] = ["Successfully logged in."]
-      redirect_to users_url
+      redirect_to subs_url
     else
-      flash.now[:errors] = @user.errors.full_messages
+      flash.now[:errors] = ["Invalid log in."]
+      @user = User.new
       render :new
     end
   end
