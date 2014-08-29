@@ -29,4 +29,12 @@ class ApplicationController < ActionController::Base
       flash[:errors] = ["You do not have permission to edit that sub"]
     end
   end
+  
+  def require_author
+    post = Post.find(params[:id])
+    unless current_user == post.author
+      redirect_to subs_url(sub) 
+      flash[:errors] = ["You do not have permission to edit that post"]
+    end
+  end
 end
