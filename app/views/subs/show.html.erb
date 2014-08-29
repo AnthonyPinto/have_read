@@ -5,3 +5,13 @@
   <%= link_to "Edit Sub", edit_sub_url(@sub), method: :get %>
   <%= link_to "Delete Sub", sub_url(@sub), method: :delete %>
 <% end %>
+
+<h3> Posts </h3>
+
+<%= button_to "New Post", new_sub_post_url(@sub), method: :get %>
+
+<ul>
+  <% @sub.posts.each do |post| %>
+  <li><a href="<%= post_url(post) %>"><%= post.title %></a></li>
+  <% end %>
+</ul>

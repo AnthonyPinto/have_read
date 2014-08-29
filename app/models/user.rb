@@ -27,6 +27,14 @@ class User < ActiveRecord::Base
     dependent: :destroy
   )
   
+  has_many(
+    :authored_posts,
+    class_name: "Post",
+    foreign_key: :moderator_id,
+    primary_key: :id,
+    dependent: :destroy
+  )
+  
   
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token

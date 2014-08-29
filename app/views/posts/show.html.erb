@@ -1,2 +1,14 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<h1><%= @post.title %></h1>
+
+<%= button_to "Edit Post", edit_post_url(@post), method: :get if is_author? %>
+
+<ul>
+  <li>Sub: <a href='<%= sub_url(@post.sub) %>'><%= @post.sub.title%></a></li>
+  <li>Author: <%= @post.author.user_name%></li>
+  <li>URL: <%= @post.url %></li>
+</ul>
+<br>
+
+<h4>Post:</h4>
+  
+<p><%= @post.content %><p>
