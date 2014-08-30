@@ -11,15 +11,17 @@
 #
 
 class Sub < ActiveRecord::Base
-  validates :title, :description, :moderator_id, presence: true
+  #validate the association!
+  validates :title, :description, :moderator, presence: true
   validates :title, uniqueness: true
   
   has_many(
-    :posts,
-    class_name: 'Post',
+    :post_subs,
+    class_name: 'PostSub',
     foreign_key: :sub_id,
     primary_key: :id,
-    dependent: :destroy
+    dependent: :destroy,
+    inverse_of: :sub
   )
   
   belongs_to(
@@ -27,6 +29,12 @@ class Sub < ActiveRecord::Base
     class_name: "User",
     foreign_key: :moderator_id,
     primary_key: :id
+  )
+  
+  has_many(
+    :posts,
+    through: :post_subs,
+    source: :post
   )
   
 end

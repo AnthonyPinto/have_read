@@ -6,26 +6,40 @@
 #  title      :string(255)
 #  url        :string(255)
 #  content    :text
-#  sub_id     :integer
 #  author_id  :integer
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 class Post < ActiveRecord::Base
-  validates :title, :sub_id, :author_id, presence: true
+  validates :title, :author_id, presence: true
   
-  belongs_to(
-  :author,
-  class_name: 'User',
-  foreign_key: :author_id,
-  primary_key: :id
+  has_many(
+    :post_subs,
+    class_name: 'PostSub',
+    foreign_key: :post_id,
+    primary_key: :id,
+    dependent: :destroy,
+    inverse_of: :post
   )
   
   belongs_to(
-    :sub,
-    class_name: 'Sub',
-    foreign_key: :sub_id,
+    :author,
+    class_name: 'User',
+    foreign_key: :author_id,
     primary_key: :id
+  )
+  
+  has_many(
+    :comments,
+    class_name: 'Comment',
+    foreign_key: :post_id,
+    primary_key: :id
+  )
+  
+  has_many(
+    :subs,
+    through: :post_subs,
+    source: :sub
   )
 end

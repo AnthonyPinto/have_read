@@ -27,7 +27,8 @@ class UsersController < ApplicationController
   
   private
   
+  #DRY this out, group with sessions_controller user_params
   def user_params
-    params.require(:user).permit(:user_name, :password, :session_token)
+    params.require(:user).permit(:user_name, :password)
   end
 end

@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  #maybe should go in subscontroller
   def require_moderator
     sub = Sub.find(params[:id])
     unless current_user == sub.moderator
@@ -30,6 +31,7 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  #posts_controller?
   def require_author
     post = Post.find(params[:id])
     unless current_user == post.author

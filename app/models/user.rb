@@ -30,16 +30,26 @@ class User < ActiveRecord::Base
   has_many(
     :authored_posts,
     class_name: "Post",
+    #BUGGGGG
     foreign_key: :moderator_id,
     primary_key: :id,
     dependent: :destroy
   )
   
+  has_many(
+    :comments,
+    class_name: 'Comment',
+    foreign_key: :commenter_id,
+    primary_key: :id,
+    dependent: :destroy
+  )
   
+  #could be private
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token
   end
   
+  #class methods first!
   def self.generate_session_token
     SecureRandom.urlsafe_base64
   end
@@ -55,6 +65,7 @@ class User < ActiveRecord::Base
     self.password_digest = BCrypt::Password.create(password)
   end
   
+  #class method!
   def self.find_by_credentials(user_name, password)
     user = User.find_by(user_name: user_name)
     return user if (user && user.is_password?(password))

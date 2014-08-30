@@ -3,7 +3,14 @@
 <%= button_to "Edit Post", edit_post_url(@post), method: :get if is_author? %>
 
 <ul>
-  <li>Sub: <a href='<%= sub_url(@post.sub) %>'><%= @post.sub.title%></a></li>
+  <li>Subs:</li>
+  <ul>
+    <% @post.subs.each do |sub| %>
+      <li><a href='<%= sub_url(sub) %>'><%= sub.title%></a></li>
+    <% end %>
+  </ul>
+  
+  
   <li>Author: <%= @post.author.user_name%></li>
   <li>URL: <%= @post.url %></li>
 </ul>
@@ -12,3 +19,15 @@
 <h4>Post:</h4>
   
 <p><%= @post.content %><p>
+  
+<h3> Comment </h3>
+<%= button_to "New Comment", new_post_comment_url(@post), method: :get%>
+  <% @post.comments.each do |comment| %>
+
+    <li><strong><%=comment.commenter.user_name%></strong></li>
+    <ul>
+      <li><%=comment.content%></li>
+    </ul>
+    <br>
+  <% end %>
+</ul>

@@ -1,20 +1,12 @@
 <% if @sub && @sub.persisted? %>
-
 <form action="<%= sub_url(@sub) %>" method="post">
   <input 
     type='hidden'
     name='_method'
-    value='PATCH'
-  >
-
+    value='PATCH'>
 <% else %>
-
 <form action="<%= subs_url %>" method="post">
-  
 <% end %>
-  
-  
-  
   <input type="hidden" 
           name="authenticity_token" 
           value="<%= form_authenticity_token %>">
@@ -23,8 +15,7 @@
     type="text" 
     id="sub_title" 
     name="sub[title]" 
-    value="<%= @sub.title %>"
-    >
+    value="<%= @sub.title %>">
   <br>
   
   <label for="sub_description"> Description </label>
@@ -32,8 +23,7 @@
     type="text" 
     id="sub_description" 
     name="sub[description]" 
-    value="<%= @sub.description %>"
-    >
+    value="<%= @sub.description %>">
   
   <br>
   
